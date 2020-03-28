@@ -42,7 +42,7 @@ const mapStateToProps = ({ list }) => {
 const mapDispatchToProps = dispatch => {
   return {
     getPosts: page => {
-      requests.all(dispatch, page);
+      requests.getListStarships(dispatch, page);
     }
   };
 };

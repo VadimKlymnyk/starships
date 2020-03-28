@@ -53,7 +53,7 @@ const mapStateToProps = ({ starship }) => {
 const mapDispatchToProps = dispatch => {
   return {
     getPost: id => {
-      requests.one(dispatch, id);
+      requests.getOneStarships(dispatch, id);
     }
   };
 };

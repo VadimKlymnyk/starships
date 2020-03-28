@@ -1,7 +1,8 @@
-export async function all(dispatch,page) {
+export async function getListStarships(dispatch,page) {
   try {
     dispatch({ type: "GET_LIST_STARSHIPS" });
     let data = await makeRequest(`https://swapi.co/api/starships/?page=${page}`);
+
     console.log(data)
     dispatch({ type: "GET_LIST_STARSHIPS_SUCCESS", data: data.results});
     return data.results;
@@ -10,7 +11,7 @@ export async function all(dispatch,page) {
   }
 }
 
-export async function one(dispatch, id) {
+export async function getOneStarships(dispatch, id) {
     try {
       dispatch({ type: "GET_STARSHIP" });
       let data = await makeRequest(

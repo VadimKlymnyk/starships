@@ -1,10 +1,12 @@
 export async function getListStarships(dispatch, page, name) {
   try {
     dispatch({ type: "GET_LIST_STARSHIPS" });
-    let data;
-    if (name === 0) {
+    console.log("1")
+    let data = await makeRequest(`https://swapi.co/api/starships/?page=1`);
+    if (name === null) {
+      console.log("page")
       data = await makeRequest(`https://swapi.co/api/starships/?page=${page}`);
-    } else {
+    } else  {
       data = await makeRequest(
         `https://swapi.co/api/starships/?search=${name}`
       );

@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as requests from "../requests/Requests";
-import ViewStarship from "./ViewStarship";
-import Page from "./Page";
+import ViewStarship from "./viewOneStarship/ViewStarship";
+import Page from "./listStarships/Page";
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,19 +11,19 @@ import {
   useParams
 } from "react-router-dom";
 
-function App(props) {
+function App() {
   return (
     <Router>
       <div className="container">
         <nav className="navbar navbar-light bg-light">
-          <Link to="/?page=1">
+          <Link to="/">
             <span className="navbar-brand">Home</span>
           </Link>
         </nav>
 
         <Switch>
-          <Route exact path="/">
-            <Page props={props} />
+          <Route exact path="/" >
+            <Page/>
           </Route>
           <Route exact path="/starships/:id" component={ViewStarship} />
         </Switch>
@@ -32,20 +32,4 @@ function App(props) {
   );
 }
 
-const mapStateToProps = ({ list }) => {
-  return {
-    list: list.data,
-    loading: list.loading,
-    count: list.count
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getPosts: (page, name) => {
-      requests.getListStarships(dispatch, page, name);
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

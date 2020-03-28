@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import * as requests from "../requests/Requests";
+import * as requests from "../../requests/Requests";
 import { connect } from "react-redux";
+import Loading from "../Loader/Loading";
 
 function ViewStarship(props) {
   let click = useParams();
@@ -12,18 +13,20 @@ function ViewStarship(props) {
 
   return (
     <div>
+      <table className="table">
+        <thead className="thead-dark">
+          <h1>{`Starship ${click.id}`}</h1>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+      </table>
       {!props.loading ? (
-        <table className="table">
-          <thead className="thead-dark">
-            <h1>{`Starship ${click.id}`}</h1>
-            <tr>
-              <th scope="col"></th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
+        <table>
           <tbody>
             {Object.keys(props.starship).map(item => (
-              <tr key = {item}>
+              <tr key={item}>
                 <th scope="row">{item}</th>
                 <td>{props.starship[item]}</td>
               </tr>
@@ -31,11 +34,7 @@ function ViewStarship(props) {
           </tbody>
         </table>
       ) : (
-        <div class="d-flex justify-content-center">
-          <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-        </div>
+        <Loading />
       )}
     </div>
   );

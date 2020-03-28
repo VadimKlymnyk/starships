@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import * as requests from "../requests/Requests";
 import { connect } from "react-redux";
@@ -24,7 +24,7 @@ function ViewStarship(props) {
           </thead>
           <tbody>
             {Object.keys(props.starship).map(item => (
-              <tr>
+              <tr key = {item}>
                 <th scope="row">{item}</th>
                 <td>{props.starship[item]}</td>
               </tr>
@@ -32,7 +32,11 @@ function ViewStarship(props) {
           </tbody>
         </table>
       ) : (
-        <div>loading</div>
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import * as requests from "../requests/Requests";
-import ListStarships from "./ListStarships";
 import ViewStarship from "./ViewStarship";
+import Page from "./Page";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,37 +10,22 @@ import {
   Link,
   useParams
 } from "react-router-dom";
-import Pagination from "./Paginations";
 
 function App(props) {
-  const [currentPage, setCurrentPage] = useState(1);
-  
-  useEffect(() => {
-    props.getPosts(currentPage);
-  }, [currentPage]);
-
-  async function paginate(pageNumber) {
-    setCurrentPage(pageNumber);
-  }
-
   return (
     <Router>
       <div className="container">
         <nav className="navbar navbar-light bg-light">
-          <Link to="/?page=1">
-            <a className="navbar-brand">Home</a>
+          <Link to="/">
+            <span className="navbar-brand">Home</span>
           </Link>
         </nav>
 
         <Switch>
-          <Route exact path="/">
-            <h1>{`Starships Page ${currentPage}`}</h1>
-            <div>{<ListStarships list={props.list} />}</div>
-            <Pagination paginate={paginate} />
+          <Route exact path="/" >
+            <Page props={props} />
           </Route>
-          <Route exact path="/starships/:id">
-            <ViewStarship />
-          </Route>
+          <Route exact path="/starships/:id" component={ViewStarship} />
         </Switch>
       </div>
     </Router>

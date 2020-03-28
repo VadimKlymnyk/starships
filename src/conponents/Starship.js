@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, Link, useParams } from "react-router-dom";
+import { withRouter, Link} from "react-router-dom";
 
 const Starship = ({ starship }) => {
   let id = starship.url.slice(20, -1);

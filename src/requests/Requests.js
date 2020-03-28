@@ -1,17 +1,17 @@
-export async function all(page) {
+export async function all(dispatch) {
   try {
-    let data = await makeRequest(`https://swapi.co/api/starships/?page=${page}`);
-    return data;
+    dispatch({ type: "GET_LIST_STARSHIPS" });
+    let data = await makeRequest(`https://swapi.co/api/starships/`);
+    dispatch({ type: "GET_LIST_STARSHIPS_SUCCESS", data: data.results });
+    return data.results;
   } catch (error) {
-    console.log(error);
+    dispatch({ type: "GET_LIST_STARSHIPS_ERROR", error });
   }
 }
 
 export async function one(id) {
   try {
-    let data = await makeRequest(
-      `https://swapi.co/api/starships/${id}`
-    );
+    let data = await makeRequest(`https://swapi.co/api/starships/${id}`);
     return data;
   } catch (error) {
     console.log(error);

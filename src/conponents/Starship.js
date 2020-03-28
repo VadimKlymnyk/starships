@@ -1,13 +1,13 @@
 import React from "react";
 
-const Starship = ({ list }) => {
+const Starship = ({ starship }) => {
     //console.log(list)
 
   return (
     <tr>
       <th scope="row">1</th>
-      <td>{list.name}</td>
-      <td>{list.model}</td>
+      <td>{starship.name}</td>
+      <td>{starship.model}</td>
     </tr>
   );
 };

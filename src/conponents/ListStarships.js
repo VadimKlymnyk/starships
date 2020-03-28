@@ -1,10 +1,10 @@
 import React from "react";
 import Starship from "./Starship";
 
-const ListStarships = ({ lists }) => {
+const ListStarships = ({ list }) => {
   return (
-    <table class="table">
-      <thead class="thead-dark">
+    <table className="table">
+      <thead className="thead-dark">
         <tr>
           <th scope="col">#</th>
           <th scope="col">Name</th>
@@ -12,8 +12,8 @@ const ListStarships = ({ lists }) => {
         </tr>
       </thead>
       <tbody>
-        {lists.map(list => (
-          <Starship list={list} key={list.id} />
+        {list.map(starship => (
+          <Starship starship={starship} key={starship.id} />
         ))}
       </tbody>
     </table>

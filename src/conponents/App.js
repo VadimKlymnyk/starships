@@ -1,35 +1,42 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import * as requests from '../requests/Requests'
 import ListStarships from './ListStarships'
 
 
 
 
-function App() {
-
-  let [data, setData] = useState([])
-
-  useEffect(async () => {
-    let data = await requests.all(1)
-    console.log(data)
-    console.log(data.results)
-    setData(data.results)
-    //let responce = await data.json();
-    //console.log(responce)
-  }, [])
-
+function App(props) {
+  useEffect(() => {
+    props.getPosts();
+  }, []);
 
   return (
     <div className="container">
-      <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="/">
+      <nav className="navbar navbar-light bg-light">
+        <a className="navbar-brand" href="/">
           Home
         </a>
       </nav>
       <h1>Starships get</h1>
-      <div>{<ListStarships lists={data}/>}</div>
+      <div>{<ListStarships list={props.list} />}</div>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = ({ list }) => {
+return {
+    list: list.data,
+    loading: list.loading
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+return {
+    getPosts: () => {
+      requests.all(dispatch);
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -4,7 +4,6 @@ import * as requests from "../requests/Requests";
 import { connect } from "react-redux";
 
 function ViewStarship(props) {
-  //console.log(Object.values(props.starship));
   let click = useParams();
 
   useEffect(() => {
@@ -46,7 +45,6 @@ const mapStateToProps = ({ starship }) => {
   return {
     starship: starship.data,
     loading: starship.loading
-    //id: post.id
   };
 };
 

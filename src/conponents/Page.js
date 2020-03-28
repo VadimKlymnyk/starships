@@ -3,31 +3,30 @@ import { connect } from "react-redux";
 import ListStarships from "./ListStarships";
 import * as requests from "../requests/Requests";
 import Pagination from "./Paginations";
-import SearchByName from "./Search"
+import SearchByName from "./Search";
 import { useParams } from "react-router-dom";
 
 const Page = ({ props }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  let a;
 
   useEffect(() => {
-    props.getPosts(currentPage);
+    props.getPosts(currentPage, 0);
   }, [currentPage]);
 
-   function Search(body) {
-    console.log(body)
+  function Search(body) {
+    props.getPosts(0, body);
   }
 
   return (
     <div>
       <h1>{`Starships Page ${currentPage}`}</h1>
       <nav className="navbar navbar-light bg-light">
-      <SearchByName onCreate={Search} />
+        <SearchByName onCreate={Search} />
       </nav>
       {!props.loading ? (
         <div>
           <div>{<ListStarships list={props.list} />}</div>
-          <Pagination paginate={setCurrentPage} />
+          <Pagination paginate={setCurrentPage} count={props.count} />
         </div>
       ) : (
         <div className="d-flex justify-content-center">
@@ -39,20 +38,5 @@ const Page = ({ props }) => {
     </div>
   );
 };
-const mapStateToProps = ({ search }) => {
-    return {
-    search: search.data,
-      loading: search.loading
-    };
-  };
-  
-  const mapDispatchToProps = dispatch => {
-    return {
-      getPosts: name => {
-        requests.searchByName(dispatch, name);
-      }
-    };
-  };
 
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(Page);
+export default Page;

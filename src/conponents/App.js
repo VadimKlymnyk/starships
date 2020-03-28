@@ -16,13 +16,13 @@ function App(props) {
     <Router>
       <div className="container">
         <nav className="navbar navbar-light bg-light">
-          <Link to="/">
+          <Link to="/?page=1">
             <span className="navbar-brand">Home</span>
           </Link>
         </nav>
 
         <Switch>
-          <Route exact path="/" >
+          <Route exact path="/">
             <Page props={props} />
           </Route>
           <Route exact path="/starships/:id" component={ViewStarship} />
@@ -32,18 +32,18 @@ function App(props) {
   );
 }
 
-
 const mapStateToProps = ({ list }) => {
   return {
     list: list.data,
-    loading: list.loading
+    loading: list.loading,
+    count: list.count
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPosts: page => {
-      requests.getListStarships(dispatch, page);
+    getPosts: (page, name) => {
+      requests.getListStarships(dispatch, page, name);
     }
   };
 };

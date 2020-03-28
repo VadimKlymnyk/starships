@@ -5,7 +5,7 @@ function list(state = { data: [], error: null, loading: true }, action) {
     case "GET_LIST_STARSHIPS":
       return { ...state, loading: true };
     case "GET_LIST_STARSHIPS_SUCCESS":
-      return { ...state, loading: false, data: action.data };
+      return { ...state, loading: false, count: action.counter, data: action.data };
     case "GET_LIST_STARSHIPS_ERROR":
       return { ...state, loading: false, error: action.error };
     default:
@@ -25,24 +25,11 @@ function starship(state = { data: [], error: null, loading: true }, action) {
     }
   }
 
-  function search(state = { data: [], error: null, loading: true }, action) {
-    switch (action.type) {
-      case "GET_SEARCH_STARSHIP":
-        return { ...state, loading: true };
-      case "GET_SEARCH_STARSHIP_SUCCESS":
-        return { ...state, loading: false, data: action.data };
-      case "GET_SEARCH_STARSHIP_ERROR":
-        return { ...state, loading: false, error: action.error };
-      default:
-        return state;
-    }
-  }
 
 
 const reducers = combineReducers({
   list,
-  starship,
-  search
+  starship
 });
 
 let store = createStore(reducers);

@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-const Pagination = ({ paginate }) => {
+const Pagination = ({ paginate, count }) => {
   const pageNumbers = [];
-
-  for (let i = 1; i <= 4; i++) {
+  
+  for (let i = 1; i <= 1+(count/10); i++) {
     pageNumbers.push(i);
   }
 

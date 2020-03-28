@@ -9,14 +9,20 @@ export async function all(dispatch) {
   }
 }
 
-export async function one(id) {
-  try {
-    let data = await makeRequest(`https://swapi.co/api/starships/${id}`);
-    return data;
-  } catch (error) {
-    console.log(error);
+export async function one(dispatch, id) {
+    try {
+      dispatch({ type: "GET_STARSHIP" });
+      let data = await makeRequest(
+        `https://swapi.co/api/starships/${id}`
+      );
+      dispatch({ type: "GET_STARSHIP_SUCCESS", data});
+      return data;
+    } catch (error) {
+      dispatch({ type: "GET_STARSHIP_ERROR", error });
+    }
+    console.log(dispatch);
   }
-}
+
 
 function makeRequest(url, options = {}) {
   return fetch(url, options).then(response => {

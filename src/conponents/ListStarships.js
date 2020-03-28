@@ -13,7 +13,7 @@ const ListStarships = ({ list }) => {
       </thead>
       <tbody>
         {list.map(starship => (
-          <Starship starship={starship} key={starship.id} />
+          <Starship starship={starship} key={starship.url} />
         ))}
       </tbody>
     </table>

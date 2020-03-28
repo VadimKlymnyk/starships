@@ -1,14 +1,17 @@
 import React from "react";
+import { withRouter, Link } from "react-router-dom";
 
 const Starship = ({ starship }) => {
-    //console.log(list)
-
+    let id = starship.url.slice(20,-1);
+  //console.log(id);
   return (
     <tr>
-      <th scope="row">1</th>
-      <td>{starship.name}</td>
-      <td>{starship.model}</td>
+      <Link to={id}>
+        <th scope="row">•</th>
+        <td>{starship.name}</td>
+        <td>{starship.model}</td>
+      </Link>
     </tr>
   );
 };
-export default Starship;
+export default withRouter(Starship);

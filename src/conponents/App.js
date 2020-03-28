@@ -32,6 +32,7 @@ function App(props) {
   );
 }
 
+
 const mapStateToProps = ({ list }) => {
   return {
     list: list.data,

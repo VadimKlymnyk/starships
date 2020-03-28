@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import ListStarships from "./ListStarships";
+import * as requests from "../requests/Requests";
 import Pagination from "./Paginations";
 import SearchByName from "./Search"
 import { useParams } from "react-router-dom";
 
 const Page = ({ props }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  let a;
 
   useEffect(() => {
     props.getPosts(currentPage);
   }, [currentPage]);
 
-  async function Search(body) {
+   function Search(body) {
     console.log(body)
   }
 
@@ -36,4 +39,20 @@ const Page = ({ props }) => {
     </div>
   );
 };
-export default Page;
+const mapStateToProps = ({ search }) => {
+    return {
+    search: search.data,
+      loading: search.loading
+    };
+  };
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+      getPosts: name => {
+        requests.searchByName(dispatch, name);
+      }
+    };
+  };
+
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Page);

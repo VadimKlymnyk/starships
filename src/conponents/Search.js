@@ -7,6 +7,7 @@ function SearchByName({ onCreate }) {
     event.preventDefault();
 
     if (value.trim()) {
+    console.log(value)
       onCreate(value);
       setValue("");
     }

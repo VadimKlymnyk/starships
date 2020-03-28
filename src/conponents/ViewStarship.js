@@ -4,7 +4,7 @@ import * as requests from "../requests/Requests";
 import { connect } from "react-redux";
 
 function ViewStarship(props) {
-  console.log(Object.values(props.starship));
+  //console.log(Object.values(props.starship));
   let click = useParams();
 
   useEffect(() => {
@@ -13,10 +13,10 @@ function ViewStarship(props) {
 
   return (
     <div>
-        <h1>{`Starship ${click.id}`}</h1>
       {!props.loading ? (
-        <table class="table">
-          <thead>
+        <table className="table">
+          <thead className="thead-dark">
+            <h1>{`Starship ${click.id}`}</h1>
             <tr>
               <th scope="col"></th>
               <th scope="col"></th>

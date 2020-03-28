@@ -10,28 +10,36 @@ import {
   Link,
   useParams
 } from "react-router-dom";
+import Pagination from "./Paginations";
 
 function App(props) {
+  const [currentPage, setCurrentPage] = useState(1);
+  
   useEffect(() => {
-    props.getPosts();
-  }, []);
+    props.getPosts(currentPage);
+  }, [currentPage]);
+
+  async function paginate(pageNumber) {
+    setCurrentPage(pageNumber);
+  }
 
   return (
     <Router>
       <div className="container">
         <nav className="navbar navbar-light bg-light">
-          <a className="navbar-brand" href="/">
-            Home
-          </a>
+          <Link to="/?page=1">
+            <a className="navbar-brand">Home</a>
+          </Link>
         </nav>
-        
+
         <Switch>
           <Route exact path="/">
-            <h1>Starships</h1>
+            <h1>{`Starships Page ${currentPage}`}</h1>
             <div>{<ListStarships list={props.list} />}</div>
+            <Pagination paginate={paginate} />
           </Route>
           <Route exact path="/starships/:id">
-            <ViewStarship/>
+            <ViewStarship />
           </Route>
         </Switch>
       </div>
@@ -48,8 +56,8 @@ const mapStateToProps = ({ list }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPosts: () => {
-      requests.all(dispatch);
+    getPosts: page => {
+      requests.all(dispatch, page);
     }
   };
 };
